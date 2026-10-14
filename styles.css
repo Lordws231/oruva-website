@@ -101,7 +101,7 @@ p{margin:0 0 1em} a{color:var(--navy2)} img{max-width:100%}
 
 /* Footer */
 .site-footer{background:var(--navy);color:#c8d4e4;padding:64px 0 34px}
-.footer-inner{display:grid;grid-template-columns:1.1fr .6fr .9fr;gap:30px}
+.footer-inner{display:grid;grid-template-columns:1.05fr .5fr .95fr .9fr;gap:30px}
 .footer-mark{width:56px;height:60px;object-fit:cover;border-radius:12px;margin-bottom:12px}
 .site-footer strong{color:#fff;letter-spacing:.2em}
 .site-footer nav{display:flex;flex-direction:column;gap:8px}
