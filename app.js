@@ -305,8 +305,80 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { setTimeout(function () { build(false); }, SHOW_DELAY_MS); });
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(function () { window.oruvaCookieGate.then(function () { build(false); }); }, SHOW_DELAY_MS); });
   } else {
-    setTimeout(function () { build(false); }, SHOW_DELAY_MS);
+    setTimeout(function () { window.oruvaCookieGate.then(function () { build(false); }); }, SHOW_DELAY_MS);
+  }
+})();
+
+/* Cookie consent — Tesla-style card (Esther's spec, 2026-10-15).
+   Choice persists in localStorage; the card never reappears once answered.
+   Footer "Cookie Settings" links (data-cookie-settings) reopen preferences.
+   ORDERING RULE (Esther, 2026-10-15): this consent is ALWAYS the first
+   popup. window.oruvaCookieGate stays pending until the visitor answers
+   (or immediately resolves when a saved choice exists), and every other
+   automatic popup on the site must wait on it before showing. */
+(function () {
+  var KEY = 'oruva.cookieConsent.v1';
+  var gateResolve = null;
+  window.oruvaCookieGate = new Promise(function (res) { gateResolve = res; });
+  function resolveGate(value) {
+    if (gateResolve) { gateResolve(value); gateResolve = null; }
+  }
+  var banner = document.getElementById('cookieBanner');
+  if (!banner) { resolveGate(null); return; }
+  var mainView = document.getElementById('cookieMainView');
+  var settingsView = document.getElementById('cookieSettingsView');
+  var analyticsBox = document.getElementById('cookieAnalytics');
+  var marketingBox = document.getElementById('cookieMarketing');
+  function read() {
+    try { var raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }
+    catch (e) { return null; }
+  }
+  function save(prefs) {
+    prefs.necessary = true;
+    prefs.savedAt = new Date().toISOString();
+    try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {}
+    window.oruvaCookieConsent = prefs;
+    hide();
+    resolveGate(prefs);
+  }
+  function show(view) {
+    var prefs = read() || { analytics: true, marketing: true };
+    analyticsBox.checked = !!prefs.analytics;
+    marketingBox.checked = !!prefs.marketing;
+    mainView.hidden = view === 'settings';
+    settingsView.hidden = view !== 'settings';
+    banner.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(function () { banner.classList.add('show'); });
+  }
+  function hide() {
+    banner.classList.remove('show');
+    banner.setAttribute('aria-hidden', 'true');
+  }
+  document.getElementById('cookieAccept').addEventListener('click', function () {
+    save({ analytics: true, marketing: true });
+  });
+  document.getElementById('cookieReject').addEventListener('click', function () {
+    save({ analytics: false, marketing: false });
+  });
+  document.getElementById('cookieAcceptAll').addEventListener('click', function () {
+    save({ analytics: true, marketing: true });
+  });
+  document.getElementById('cookieSave').addEventListener('click', function () {
+    save({ analytics: analyticsBox.checked, marketing: marketingBox.checked });
+  });
+  document.getElementById('cookieSettingsLink').addEventListener('click', function (e) {
+    e.preventDefault(); show('settings');
+  });
+  document.querySelectorAll('[data-cookie-settings]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); show('settings'); });
+  });
+  var existing = read();
+  if (existing) { window.oruvaCookieConsent = existing; resolveGate(existing); return; }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(function () { show('main'); }, 900); });
+  } else {
+    setTimeout(function () { show('main'); }, 900);
   }
 })();
