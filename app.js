@@ -1,5 +1,13 @@
-// Oruva — mobile nav + scroll reveal
+// Oruva — mobile nav + scroll reveal + overlay header
 (function () {
+  var hdr = document.querySelector('.site-header.overlay');
+  if (hdr) {
+    var onScroll = function () {
+      hdr.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.72);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('mainNav');
   if (toggle && nav) {
