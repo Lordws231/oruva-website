@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://oruva.com.ng/sitemap.xml
