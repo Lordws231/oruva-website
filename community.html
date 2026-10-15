@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 <header class="site-header" id="top">
@@ -133,9 +133,38 @@
       <a href="https://www.facebook.com/Oruvatransport" target="_blank" rel="noopener">📘 &nbsp;Facebook — @Oruvatransport</a>
       <a href="https://discord.gg/6G67trYsMw" target="_blank" rel="noopener">🎮 &nbsp;Discord — Join the Oruva server</a>
     </nav>
-    <p class="footer-base">© 2026 Oruva Transportation Services · oruva.com.ng · Every road has a way home.</p>
+    <p class="footer-base">© 2026 Oruva Transportation Services · oruva.com.ng · <a href="#" data-cookie-settings>Cookie Settings</a> · Every road has a way home.</p>
   </div>
 </footer>
-<script src="app.js?v=2"></script>
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie consent" aria-hidden="true">
+  <div class="cookie-view" id="cookieMainView">
+    <h2 class="cookie-title">Help Us Improve Our Website with Cookies</h2>
+    <p class="cookie-text">We use cookies and process data from your device to analyze website performance, personalize content, and improve your experience. Your consent includes data transfers outside of the country you're located. View <a href="#" id="cookieSettingsLink">Cookie Settings</a> for more information.</p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-btn cookie-btn-primary" id="cookieAccept">Accept</button>
+      <button type="button" class="cookie-btn cookie-btn-light" id="cookieReject">Reject</button>
+    </div>
+  </div>
+  <div class="cookie-view" id="cookieSettingsView" hidden>
+    <h2 class="cookie-title">Cookie Settings</h2>
+    <div class="cookie-row">
+      <div><strong>Strictly Necessary</strong><p>Required for the website to work — security and your saved choices. Always active.</p></div>
+      <span class="cookie-locked">Always on</span>
+    </div>
+    <div class="cookie-row">
+      <div><strong>Analytics &amp; Performance</strong><p>Helps us understand which pages people visit so we can improve them.</p></div>
+      <label class="cookie-switch"><input type="checkbox" id="cookieAnalytics"><span></span></label>
+    </div>
+    <div class="cookie-row">
+      <div><strong>Personalization &amp; Marketing</strong><p>Lets us tailor content and measure how our campaigns perform.</p></div>
+      <label class="cookie-switch"><input type="checkbox" id="cookieMarketing"><span></span></label>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-btn cookie-btn-primary" id="cookieSave">Save My Settings</button>
+      <button type="button" class="cookie-btn cookie-btn-light" id="cookieAcceptAll">Accept All</button>
+    </div>
+  </div>
+</div>
+<script src="app.js?v=3"></script>
 </body>
 </html>
