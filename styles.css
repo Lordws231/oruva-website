@@ -65,6 +65,8 @@ p{margin:0 0 1em} a{color:var(--navy2)} img{max-width:100%}
 .cards-3{grid-template-columns:repeat(3,1fr)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:0 6px 24px rgba(8,30,58,.05)}
 .card .icon{font-size:1.5rem;display:block;margin-bottom:10px}
+.cs-tag{display:inline-block;font-family:Inter,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark);background:#f4ead3;border:1px solid var(--gold);border-radius:999px;padding:3px 10px;margin-bottom:12px}
+.live-tag{display:inline-block;font-family:Inter,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1e6b34;background:#e2f2e6;border:1px solid #57a773;border-radius:999px;padding:3px 10px;margin-bottom:12px}
 .dark-card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:#e9eef5}
 .dark-card p{color:#c8d4e4}
 
